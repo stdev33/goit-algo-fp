@@ -85,6 +85,29 @@ class LinkedList:
             current = next_node
         self.head = sorted_list.head
 
+    def merge_sorted_lists(self, list2):
+        dummy = Node(0)
+        tail = dummy
+
+        l1 = self.head
+        l2 = list2.head
+
+        while l1 is not None and l2 is not None:
+            if l1.data <= l2.data:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+
+        if l1 is not None:
+            tail.next = l1
+        else:
+            tail.next = l2
+
+        self.head = dummy.next
+
     def print_list(self):
         current = self.head
         while current:
