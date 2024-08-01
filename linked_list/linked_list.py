@@ -64,6 +64,27 @@ class LinkedList:
             current = next_node
         self.head = prev
 
+    def sorted_insert(self, new_node):
+        if self.head is None or self.head.data >= new_node.data:
+            new_node.next = self.head
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next is not None and current.next.data < new_node.data:
+                current = current.next
+            new_node.next = current.next
+            current.next = new_node
+
+    def insertion_sort(self):
+        sorted_list = LinkedList()
+        current = self.head
+        while current is not None:
+            next_node = current.next
+            current.next = None
+            sorted_list.sorted_insert(current)
+            current = next_node
+        self.head = sorted_list.head
+
     def print_list(self):
         current = self.head
         while current:
